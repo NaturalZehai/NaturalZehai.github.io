@@ -198,6 +198,24 @@ function showPage(id,btn){
 
     btn.classList.add('active');
 }
+<!-- 音乐自动播放 -->
+    <audio id="bgm" autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const bgm = document.getElementById("bgm");
+
+        // 页面加载后尝试播放
+        window.addEventListener("load", () => {
+            bgm.play().catch(() => {
+                // 如果被拦截，第一次点击页面后播放
+                document.body.addEventListener("click", () => {
+                    bgm.play();
+                }, { once: true });
+            });
+        });
+    
 </script>
 
 </body>
