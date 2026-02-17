@@ -6,180 +6,131 @@
 <title>OceanBlue</title>
 
 <style>
-/* ===== 背景 ===== */
+
+/* ====== 背景 ====== */
 body{
     margin:0;
     height:100vh;
-    font-family: Arial, sans-serif;
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden;
-    
-    background: linear-gradient(270deg,#00c6ff,#0072ff,#6dd5fa,#2980b9);
-    background-size: 800% 800%;
-    animation: bgMove 15s ease infinite;
-}
-
-/* 背景渐变动画 */
-@keyframes bgMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-/* ===== 粒子背景 ===== */
-body::before{
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
+    font-family:"Segoe UI",sans-serif;
     background:
-        radial-gradient(circle,#ffffff55 1px,transparent 1px);
-    background-size:40px 40px;
-    animation: particles 25s linear infinite;
-    z-index:0;
+    radial-gradient(circle at 20% 20%, #6ec6ff 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, #b388ff 0%, transparent 40%),
+    linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
 }
 
-@keyframes particles{
-    from{transform:translateY(0);}
-    to{transform:translateY(-200px);}
-}
-
-/* ===== 主卡片 ===== */
+/* ====== 主玻璃卡片 ====== */
 .card{
+    width:92%;
+    max-width:420px;
+    padding:30px 22px 90px;
+    border-radius:28px;
+
+    background:rgba(255,255,255,0.12);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+
+    border:1px solid rgba(255,255,255,0.25);
+    box-shadow:
+        0 10px 40px rgba(0,0,0,0.35),
+        inset 0 0 30px rgba(255,255,255,0.15);
+
     position:relative;
-    z-index:1;
-    width:380px;
-    padding:20px;
-    border-radius:20px;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border:1px solid rgba(255,255,255,0.4);
-    box-shadow:0 20px 40px rgba(0,0,0,0.2),
-                inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* ====== 彩色LOGO条 ====== */
+.logo-bar{
     text-align:center;
-    animation: popUp 0.8s ease-out;
+    margin-bottom:18px;
 }
 
-/* 弹出动画 */
-@keyframes popUp{
-    0%{transform:translateY(120px); opacity:0;}
-    60%{transform:translateY(-15px); opacity:1;}
-    80%{transform:translateY(6px);}
-    100%{transform:translateY(0);}
-}
-
-/* ===== Logo ===== */
-.logo span{
-    display:inline-block;
-    padding:10px 22px;
-    border-radius:25px;
+.logo-bar span{
+    font-size:26px;
     font-weight:bold;
     letter-spacing:3px;
-
-    /* ⭐ 玻璃效果核心 */
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    /* 边框高光 */
-    border: 1px solid rgba(255,255,255,0.5);
-
-    /* 内外阴影让更像玻璃 */
-    box-shadow:0 8px 25px rgba(0,0,0,0.15),
-                inset 0 1px 0 rgba(255,255,255,0.8);
-
-    color:#000;
+    background:linear-gradient(
+        90deg,
+        #ff5252,#ffb300,#00e676,#00b0ff,#b388ff,#ff4081
+    );
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
-/* 彩色字 */
-.logo span b:nth-child(1){color:#4aa3ff;}
-.logo span b:nth-child(2){color:#ff4a4a;}
-.logo span b:nth-child(3){color:#4aff4a;}
-.logo span b:nth-child(4){color:#ffcc00;}
-.logo span b:nth-child(5){color:#b84aff;}
-.logo span b:nth-child(6){color:#00ccff;}
-.logo span b:nth-child(7){color:#ff66cc;}
-.logo span b:nth-child(8){color:#ffaa00;}
-.logo span b:nth-child(9){color:#66ffcc;}
-.logo span b:nth-child(10){color:#ff4444;}
-
-/* ===== 标题 ===== */
+/* ====== 标题 ====== */
 .title{
-    margin-top:20px;
-    font-size:30px;
+    text-align:center;
+    font-size:42px;
     font-weight:bold;
-    color:white;
-    text-shadow:0 0 20px #ffffff;
-    animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow{
-    from{text-shadow:0 0 10px #fff;}
-    to{text-shadow:0 0 25px #fff;}
+    background:linear-gradient(90deg,#7afcff,#c77dff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
 }
 
 .subtitle{
-    color:#e0f4ff;
-    margin-bottom:15px;
+    text-align:center;
+    color:#7fd8ff;
+    margin-bottom:18px;
 }
 
-/* ===== 欢迎文字 ===== */
-.welcome{
-    font-weight:bold;
-    color:white;
-    margin-bottom:15px;
+/* ====== 分隔线 ====== */
+.line{
+    height:1px;
+    background:rgba(255,255,255,0.2);
+    margin:18px 0;
 }
 
-/* ===== 分割线 ===== */
-hr{
-    border:none;
-    border-top:1px solid #ddd;
-    margin:15px 0;
-}
-
-/* ===== 按钮 ===== */
-.btn{
-    display:block;
-    margin:12px auto;
-    padding:14px;
-    width:85%;
-    border-radius:18px;
-    background: rgba(255,255,255,0.25);
-    backdrop-filter: blur(10px);
-    border:1px solid rgba(255,255,255,0.5);
-    color:white;
+/* ====== 内容 ====== */
+.content{
     font-size:16px;
-    text-decoration:none;
-    transition: all .25s;
-    position:relative;
-    overflow:hidden;
+    line-height:1.8;
 }
 
-/* 悬浮效果 */
-.btn:hover{
-    transform: translateY(-4px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.25);
-}
-
-/* 点击波纹 */
-.btn:active::after{
-    content:"";
+/* ====== 底部导航 ====== */
+.nav{
     position:absolute;
-    width:100%;
-    height:100%;
-    background:rgba(255,255,255,0.5);
-    left:0;
-    top:0;
-    animation:ripple .5s;
+    left:15px;
+    right:15px;
+    bottom:15px;
+
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(15px);
+
+    border-radius:50px;
+    display:flex;
+    justify-content:space-around;
+    padding:8px;
+
+    border:1px solid rgba(255,255,255,0.2);
 }
 
-@keyframes ripple{
-    from{opacity:0.7;}
-    to{opacity:0;}
+/* 按钮 */
+.nav button{
+    flex:1;
+    margin:0 4px;
+    border:none;
+    padding:10px 0;
+    border-radius:30px;
+    background:transparent;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+    transition:0.3s;
 }
+
+/* 选中效果 */
+.nav button.active{
+    background:rgba(255,255,255,0.35);
+    color:#000;
+    font-weight:bold;
+}
+
+/* 页面隐藏 */
+.page{display:none;}
+.page.active{display:block;}
+
 </style>
 </head>
 
@@ -187,46 +138,67 @@ hr{
 
 <div class="card">
 
-    <div class="logo">
-        <span>
-            <b>O</b><b>c</b><b>e</b><b>a</b><b>n</b>
-            <b>B</b><b>l</b><b>u</b><b>e</b>
-        </span>
+    <div class="logo-bar">
+        <span>OceanBlue</span>
     </div>
 
     <div class="title">OceanBlue</div>
     <div class="subtitle">泽海</div>
 
-    <div class="welcome">
-        欢迎进入 OceanBlue<br>
-        作者欢迎你的到来
+    <div class="line"></div>
+
+    <!-- ====== 首页 ====== -->
+    <div id="home" class="page active">
+        <div class="content">
+            <b>欢迎进入 OceanBlue 官方网站</b><br><br>
+            ● 服务项目：<br>
+            整活网页 / 三角洲<br><br>
+
+            ● 交流群：<br>
+            QQ群1：无<br>
+            QQ群2：无
+        </div>
     </div>
 
-    <!-- 自定义按钮：主页、通知、其他 -->
-    <a class="btn" href="http://m.webcats.cn/bx/157379/67404">主页</a>
-    <a class="btn" href="通知">通知</a>
-    <a class="btn" href="其他">其他</a>
+    <!-- ====== 通知 ====== -->
+    <div id="notice" class="page">
+        <div class="content">
+            📢 暂无通知<br><br>
+            有新消息将在这里发布
+        </div>
+    </div>
 
-    <!-- 音乐自动播放 -->
-    <audio id="bgm" autoplay loop>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio>
+    <!-- ====== 其他 ====== -->
+    <div id="other" class="page">
+        <div class="content">
+            🌊 OceanBlue 项目<br>
+            高级网页设计 / 创意开发
+        </div>
+    </div>
 
-    <script>
-        const bgm = document.getElementById("bgm");
-
-        // 页面加载后尝试播放
-        window.addEventListener("load", () => {
-            bgm.play().catch(() => {
-                // 如果被拦截，第一次点击页面后播放
-                document.body.addEventListener("click", () => {
-                    bgm.play();
-                }, { once: true });
-            });
-        });
-    </script>
+    <!-- ====== 底部导航 ====== -->
+    <div class="nav">
+        <button class="active" onclick="showPage('home',this)">主页</button>
+        <button onclick="showPage('notice',this)">通知</button>
+        <button onclick="showPage('other',this)">其他</button>
+    </div>
 
 </div>
+
+<script>
+function showPage(id,btn){
+    document.querySelectorAll('.page')
+        .forEach(p=>p.classList.remove('active'));
+
+    document.getElementById(id)
+        .classList.add('active');
+
+    document.querySelectorAll('.nav button')
+        .forEach(b=>b.classList.remove('active'));
+
+    btn.classList.add('active');
+}
+</script>
 
 </body>
 </html>
