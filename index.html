@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OceanBlue</title>
+
+<style>
+/* ===== 背景 ===== */
+body{
+    margin:0;
+    height:100vh;
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    
+    background: linear-gradient(270deg,#00c6ff,#0072ff,#6dd5fa,#2980b9);
+    background-size: 800% 800%;
+    animation: bgMove 15s ease infinite;
+}
+
+/* 背景渐变动画 */
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+/* ===== 粒子背景 ===== */
+body::before{
+    content:"";
+    position:absolute;
+    width:200%;
+    height:200%;
+    background:
+        radial-gradient(circle,#ffffff55 1px,transparent 1px);
+    background-size:40px 40px;
+    animation: particles 25s linear infinite;
+    z-index:0;
+}
+
+@keyframes particles{
+    from{transform:translateY(0);}
+    to{transform:translateY(-200px);}
+}
+
+/* ===== 主卡片 ===== */
+.card{
+    position:relative;
+    z-index:1;
+    width:380px;
+    padding:20px;
+    border-radius:20px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border:1px solid rgba(255,255,255,0.4);
+    box-shadow:0 20px 40px rgba(0,0,0,0.2),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+    text-align:center;
+    animation: popUp 0.8s ease-out;
+}
+
+/* 弹出动画 */
+@keyframes popUp{
+    0%{transform:translateY(120px); opacity:0;}
+    60%{transform:translateY(-15px); opacity:1;}
+    80%{transform:translateY(6px);}
+    100%{transform:translateY(0);}
+}
+
+/* ===== Logo ===== */
+.logo span{
+    display:inline-block;
+    padding:10px 22px;
+    border-radius:25px;
+    font-weight:bold;
+    letter-spacing:3px;
+
+    /* ⭐ 玻璃效果核心 */
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* 边框高光 */
+    border: 1px solid rgba(255,255,255,0.5);
+
+    /* 内外阴影让更像玻璃 */
+    box-shadow:0 8px 25px rgba(0,0,0,0.15),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+
+    color:#000;
+}
+
+/* 彩色字 */
+.logo span b:nth-child(1){color:#4aa3ff;}
+.logo span b:nth-child(2){color:#ff4a4a;}
+.logo span b:nth-child(3){color:#4aff4a;}
+.logo span b:nth-child(4){color:#ffcc00;}
+.logo span b:nth-child(5){color:#b84aff;}
+.logo span b:nth-child(6){color:#00ccff;}
+.logo span b:nth-child(7){color:#ff66cc;}
+.logo span b:nth-child(8){color:#ffaa00;}
+.logo span b:nth-child(9){color:#66ffcc;}
+.logo span b:nth-child(10){color:#ff4444;}
+
+/* ===== 标题 ===== */
+.title{
+    margin-top:20px;
+    font-size:30px;
+    font-weight:bold;
+    color:white;
+    text-shadow:0 0 20px #ffffff;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+    from{text-shadow:0 0 10px #fff;}
+    to{text-shadow:0 0 25px #fff;}
+}
+
+.subtitle{
+    color:#e0f4ff;
+    margin-bottom:15px;
+}
+
+/* ===== 欢迎文字 ===== */
+.welcome{
+    font-weight:bold;
+    color:white;
+    margin-bottom:15px;
+}
+
+/* ===== 分割线 ===== */
+hr{
+    border:none;
+    border-top:1px solid #ddd;
+    margin:15px 0;
+}
+
+/* ===== 按钮 ===== */
+.btn{
+    display:block;
+    margin:12px auto;
+    padding:14px;
+    width:85%;
+    border-radius:18px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,0.5);
+    color:white;
+    font-size:16px;
+    text-decoration:none;
+    transition: all .25s;
+    position:relative;
+    overflow:hidden;
+}
+
+/* 悬浮效果 */
+.btn:hover{
+    transform: translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.25);
+}
+
+/* 点击波纹 */
+.btn:active::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.5);
+    left:0;
+    top:0;
+    animation:ripple .5s;
+}
+
+@keyframes ripple{
+    from{opacity:0.7;}
+    to{opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="logo">
+        <span>
+            <b>O</b><b>c</b><b>e</b><b>a</b><b>n</b>
+            <b>B</b><b>l</b><b>u</b><b>e</b>
+        </span>
+    </div>
+
+    <div class="title">OceanBlue</div>
+    <div class="subtitle">泽海</div>
+
+    <div class="welcome">
+        欢迎进入 OceanBlue<br>
+        作者欢迎你的到来
+    </div>
+
+    <!-- 自定义按钮：主页、通知、其他 -->
+    <a class="btn" href="http://m.webcats.cn/bx/157379/67404">主页</a>
+    <a class="btn" href="通知">通知</a>
+    <a class="btn" href="其他">其他</a>
+
+    <!-- 音乐自动播放 -->
+    <audio id="bgm" autoplay loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const bgm = document.getElementById("bgm");
+
+        // 页面加载后尝试播放
+        window.addEventListener("load", () => {
+            bgm.play().catch(() => {
+                // 如果被拦截，第一次点击页面后播放
+                document.body.addEventListener("click", () => {
+                    bgm.play();
+                }, { once: true });
+            });
+        });
+    </script>
+
+</div>
+
+</body>
+</html>
