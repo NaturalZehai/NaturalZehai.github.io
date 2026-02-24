@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OceanBlue</title>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -25,14 +24,9 @@ body{
   animation: bgShift 18s ease-in-out infinite alternate;
 }
 @keyframes bgShift{to{filter:hue-rotate(18deg) saturate(1.1)}}
-
 .bg::after{
   content:"";position:absolute;inset:-20%;
-  background:repeating-linear-gradient(
-    120deg,
-    transparent 0 18px,
-    rgba(255,255,255,.04) 18px 20px
-  );
+  background:repeating-linear-gradient(120deg,transparent 0 18px,rgba(255,255,255,.04) 18px 20px);
   opacity:.5;
   animation: waves 14s linear infinite;
 }
@@ -91,7 +85,6 @@ body{
   box-shadow:0 0 25px #38bdf8;
   position:relative;
 }
-
 .hit{animation:hitAnim .25s}
 @keyframes hitAnim{
   0%{ transform:translateX(0); }
@@ -114,59 +107,48 @@ body{
   opacity:0;
   pointer-events:none;
 }
-
-.whip.active{
-  animation: whipAnim .25s ease-out;
-}
-
-@keyframes whipAnim{
-  0%{transform:rotate(30deg);opacity:1}
-  100%{transform:rotate(-35deg);opacity:0}
-}
+.whip.active{animation: whipAnim .25s ease-out;}
+@keyframes whipAnim{0%{transform:rotate(30deg);opacity:1}100%{transform:rotate(-35deg);opacity:0}}
 
 /* ===== 文本与连击 ===== */
-.hitText{
-  text-align:center;
-  margin-top:10px;
-  font-size:16px;
-  color:#7afcff;
-}
-
-.combo{
-  text-align:center;
-  margin-top:6px;
-  font-weight:800;
-  color:#ff7676;
-  font-size:18px;
-}
+.hitText{text-align:center;margin-top:10px;font-size:16px;color:#7afcff;}
+.combo{text-align:center;margin-top:6px;font-weight:800;color:#ff7676;font-size:18px;}
 
 /* ===== 攻击按钮 ===== */
-.attackBtn{
-  display:block;margin:30px auto 0;
-  padding:16px 40px;font-size:20px;
-  border:none;border-radius:50px;
-  background:#ef4444;color:white;
-  cursor:pointer;
-  box-shadow:0 0 20px #ef4444;
-}
+.attackBtn{display:block;margin:30px auto 0;padding:16px 40px;font-size:20px;
+  border:none;border-radius:50px;background:#ef4444;color:white;cursor:pointer;
+  box-shadow:0 0 20px #ef4444;}
 .attackBtn:hover{background:#dc2626}
 
 /* ===== 入场 ===== */
-.intro{
-  position:fixed;inset:0;display:grid;place-items:center;
+.intro{position:fixed;inset:0;display:grid;place-items:center;
   background:radial-gradient(circle at 50% 40%, #0b2a44, #020b14 70%);
-  z-index:10;animation: fadeOut 1.2s ease 2.2s forwards;
-}
-.intro h1{font-size:42px;
-  background:linear-gradient(90deg,#7afcff,#82b1ff,#7afcff);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  opacity:0;transform:translateY(20px);
+  z-index:10;animation: fadeOut 1.2s ease 2.2s forwards;}
+.intro h1{font-size:42px;background:linear-gradient(90deg,#7afcff,#82b1ff,#7afcff);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(20px);
   animation: introText 1.2s ease .4s forwards}
 @keyframes introText{to{opacity:1;transform:translateY(0)}}
 @keyframes fadeOut{to{opacity:0;visibility:hidden}}
+
+/* ===== 其他页面设置样式 ===== */
+#other .content ul{list-style:none;padding:0;margin-top:10px}
+#other .content ul li{
+  padding:10px 14px;border-radius:12px;margin:6px 0;
+  background:rgba(255,255,255,.08);
+  backdrop-filter:blur(30%);
+  cursor:pointer;
+  transition:background 0.3s, transform 0.2s;
+}
+#other .content ul li:hover{
+  background:rgba(255,255,255,.15);
+  transform:translateX(6px);
+}
+
+/* ===== 音乐设置页面 ===== */
+#musicSettings{margin-top:12px;}
+#musicSettings audio{width:100%;margin-top:10px;}
 </style>
 </head>
-
 <body>
 
 <div class="bg"></div>
@@ -178,7 +160,6 @@ body{
 </audio>
 
 <div class="card">
-
   <div class="title">OceanBlue</div>
   <div class="subtitle">泽海</div>
   <div class="line"></div>
@@ -197,29 +178,45 @@ body{
 
   <!-- 整活网页 -->
   <div id="fun" class="page">
-
     <div class="avatar" id="avatar">
       <img src="凡光.jpg" width="100%" height="100%">
       <div class="whip" id="whip"></div>
     </div>
-
     <div class="hitText">我是凡光，快来抽我</div>
     <div class="combo" id="combo">COMBO x0</div>
-
     <button class="attackBtn" onclick="hit()">抽打他！</button>
-
     <audio id="hitSound" src="饿.MP3"></audio>
-
   </div>
 
+  <!-- 通知 -->
   <div id="notice" class="page">
     <div class="content">📢 暂无通知</div>
   </div>
 
+  <!-- 其他 -->
   <div id="other" class="page">
-    <div class="content">🌊 OceanBlue 项目</div>
+    <div class="content">
+      🌊 OceanBlue 项目
+      <br>
+      <ul>
+        <li onclick="toggleMusicSettings()">⚙️ 音乐设置</li>
+      </ul>
+      <!-- 音乐设置嵌入 -->
+      <div id="musicSettings" style="display:none;">
+        <p>选择你喜欢的背景音乐：</p>
+        <ul id="musicList">
+          <li data-src="The Other side of paradise.mp3">🎵 The Other side of paradise</li>
+          <li data-src=".mp3">🎵 暂无</li>
+          <li data-src=".mp3">🎵 暂无</li>
+        </ul>
+        <audio id="customBgm" controls>
+          你的浏览器不支持播放
+        </audio>
+      </div>
+    </div>
   </div>
 
+  <!-- 导航 -->
   <div class="nav">
     <button class="active" onclick="showPage('home',this)">主页</button>
     <button onclick="showPage('notice',this)">通知</button>
@@ -278,6 +275,32 @@ for(let i=0;i<26;i++){
 /* 自动播放兼容 */
 const audio=document.getElementById('bgm');
 document.addEventListener('click',()=>audio.play().catch(()=>{}),{once:true});
+
+/* ===== 音乐设置功能 ===== */
+const customBgm = document.getElementById('customBgm');
+const musicList = document.getElementById('musicList');
+const bgm = document.getElementById('bgm');
+
+musicList.addEventListener('click', e=>{
+  if(e.target && e.target.nodeName==='LI'){
+    customBgm.src = e.target.dataset.src;
+    customBgm.play().catch(()=>{});
+    Array.from(musicList.children).forEach(li=>li.style.background='rgba(255,255,255,.08)');
+    e.target.style.background='rgba(255,255,255,.2)';
+  }
+});
+
+// 用户播放自定义音乐时暂停BGM
+customBgm.addEventListener('play', ()=>{ if(!bgm.paused) bgm.pause(); });
+// 暂停或结束自定义音乐恢复BGM
+customBgm.addEventListener('pause', ()=>{ if(bgm.paused) bgm.play().catch(()=>{}); });
+customBgm.addEventListener('ended', ()=>{ if(bgm.paused) bgm.play().catch(()=>{}); });
+
+// 切换音乐设置显示
+function toggleMusicSettings(){
+  const el = document.getElementById('musicSettings');
+  el.style.display = el.style.display==='none'?'block':'none';
+}
 </script>
 
 </body>
