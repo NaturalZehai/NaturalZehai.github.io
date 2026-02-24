@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OceanBlue</title>
+<title>OceanBlue · 至尊版</title>
 
 <style>
-/* ===== 全局 ===== */
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{
@@ -16,7 +15,7 @@ body{
   background:#020b14;
 }
 
-/* ===== 动态海洋背景（渐变 + 光斑 + 波动） ===== */
+/* ===== 背景 ===== */
 .bg{
   position:fixed;inset:0;z-index:-2;
   background:
@@ -27,7 +26,6 @@ body{
 }
 @keyframes bgShift{to{filter:hue-rotate(18deg) saturate(1.1)}}
 
-/* 海面波纹光 */
 .bg::after{
   content:"";position:absolute;inset:-20%;
   background:repeating-linear-gradient(
@@ -40,7 +38,7 @@ body{
 }
 @keyframes waves{to{transform:translateX(-120px)}}
 
-/* ===== 粒子气泡 ===== */
+/* ===== 气泡 ===== */
 .bubbles{position:fixed;inset:0;z-index:-1;pointer-events:none}
 .bubbles i{
   position:absolute;bottom:-60px;width:8px;height:8px;border-radius:50%;
@@ -50,109 +48,133 @@ body{
 }
 @keyframes rise{to{transform:translateY(-110vh) scale(1.3);opacity:.2}}
 
-/* ===== 主玻璃卡片（Liquid Glass） ===== */
+/* ===== 卡片 ===== */
 .card{
-  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.9);
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:92%;max-width:440px;
   padding:34px 24px 96px;border-radius:30px;
   background:rgba(255,255,255,.08);
   backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
   border:1px solid rgba(255,255,255,.35);
   box-shadow:
     0 30px 80px rgba(0,0,0,.7),
     inset 0 0 60px rgba(255,255,255,.18);
-  opacity:0;
-  animation: cardIn 1.2s cubic-bezier(.2,.8,.2,1) .2s forwards;
-}
-@keyframes cardIn{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
-
-/* 发光边缘 */
-.card::before{
-  content:"";position:absolute;inset:-1px;border-radius:inherit;
-  background:linear-gradient(120deg,#00e5ff66,#4f7cff66,#00e5ff66);
-  filter:blur(10px);z-index:-1;opacity:.7;
 }
 
-/* ===== LOGO ===== */
-.logo{font-size:28px;font-weight:800;text-align:center;letter-spacing:3px;
-  background:linear-gradient(90deg,#7afcff,#82b1ff,#7afcff);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  animation: shine 6s linear infinite;
-}
-@keyframes shine{to{background-position:200% 0}}
-
-.title{margin-top:6px;text-align:center;font-size:44px;font-weight:900;
+/* ===== 标题 ===== */
+.title{font-size:44px;font-weight:900;text-align:center;
   background:linear-gradient(90deg,#7afcff,#82b1ff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .subtitle{text-align:center;color:#9fdfff;margin-bottom:20px}
 .line{height:1px;background:rgba(255,255,255,.2);margin:18px 0}
 .content{font-size:16px;line-height:1.8}
 
-/* ===== 底部导航 ===== */
+/* ===== 导航 ===== */
 .nav{position:absolute;left:16px;right:16px;bottom:16px;
   display:flex;gap:6px;padding:8px;border-radius:999px;
   background:rgba(255,255,255,.12);
   backdrop-filter:blur(20px);
   border:1px solid rgba(255,255,255,.25)}
 .nav button{flex:1;border:none;border-radius:999px;padding:10px 0;
-  background:transparent;color:#fff;font-size:15px;cursor:pointer;
-  transition:.25s}
+  background:transparent;color:#fff;font-size:15px;cursor:pointer}
 .nav button.active{background:rgba(255,255,255,.35);color:#00131f;font-weight:700}
 
-.page{display:none}.page.active{display:block}
+.page{display:none}
+.page.active{display:block}
 
-/* ===== 入场遮罩 ===== */
+/* ===== 受击头像 ===== */
+.avatar{
+  margin:20px auto;
+  width:160px;height:160px;border-radius:50%;
+  overflow:hidden;
+  border:4px solid #38bdf8;
+  box-shadow:0 0 25px #38bdf8;
+}
+
+.hit{animation:hitAnim .25s}
+
+@keyframes hitAnim{
+  0%{ transform:translateX(0); }
+  25%{ transform:translateX(-12px) rotate(-5deg); }
+  50%{ transform:translateX(12px) rotate(5deg); }
+  75%{ transform:translateX(-8px); }
+  100%{ transform:translateX(0); }
+}
+
+.attackBtn{
+  display:block;margin:30px auto 0;
+  padding:16px 40px;font-size:20px;
+  border:none;border-radius:50px;
+  background:#ef4444;color:white;
+  cursor:pointer;
+  box-shadow:0 0 20px #ef4444;
+}
+.attackBtn:hover{background:#dc2626}
+
+/* ===== 入场 ===== */
 .intro{
   position:fixed;inset:0;display:grid;place-items:center;
   background:radial-gradient(circle at 50% 40%, #0b2a44, #020b14 70%);
   z-index:10;animation: fadeOut 1.2s ease 2.2s forwards;
 }
-.intro h1{font-size:42px;letter-spacing:4px;
+.intro h1{font-size:42px;
   background:linear-gradient(90deg,#7afcff,#82b1ff,#7afcff);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   opacity:0;transform:translateY(20px);
   animation: introText 1.2s ease .4s forwards}
 @keyframes introText{to{opacity:1;transform:translateY(0)}}
 @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-
 </style>
 </head>
+
 <body>
 
 <div class="bg"></div>
 <div class="bubbles" id="bubbles"></div>
-
-<!-- 入场标题 -->
 <div class="intro"><h1>OceanBlue</h1></div>
 
-<!-- 自动播放音乐 -->
 <audio id="bgm" autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
+<!-- ===== 主卡片 ===== -->
 <div class="card">
+
   <div class="title">OceanBlue</div>
   <div class="subtitle">泽海</div>
   <div class="line"></div>
 
+  <!-- 主页 -->
   <div id="home" class="page active">
     <div class="content">
       <b>欢迎进入 OceanBlue 官方网站</b><br><br>
       ● 服务项目：<br>
-      整活网页 / 三角洲<br><br>
-      ● 交流群：<br>
-      QQ群1：无<br>
-      QQ群2：无
+      <span style="color:#7afcff;cursor:pointer"
+        onclick="showPage('fun',document.querySelector('.nav button'))">
+        整活网页
+      </span> / 三角洲
     </div>
   </div>
 
+  <!-- 整活网页（受击效果） -->
+  <div id="fun" class="page">
+
+    <div class="avatar" id="avatar">
+      <img src="凡光.jpg" width="100%" height="100%">
+    </div>
+
+    <button class="attackBtn" onclick="hit()">攻击！</button>
+
+    <audio id="hitSound" src="饿.mp3"></audio>
+
+  </div>
+
   <div id="notice" class="page">
-    <div class="content">📢 暂无通知<br><br>有新消息将在这里发布</div>
+    <div class="content">📢 暂无通知</div>
   </div>
 
   <div id="other" class="page">
-    <div class="content">🌊 OceanBlue 项目<br>高级网页设计 / 创意开发</div>
+    <div class="content">🌊 OceanBlue 项目</div>
   </div>
 
   <div class="nav">
@@ -166,21 +188,34 @@ body{
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+  if(btn){
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
 }
 
-/* 气泡生成 */
+function hit(){
+  const avatar=document.getElementById("avatar");
+  const sound=document.getElementById("hitSound");
+
+  sound.currentTime=0;
+  sound.play().catch(()=>{});
+
+  avatar.classList.remove("hit");
+  void avatar.offsetWidth;
+  avatar.classList.add("hit");
+}
+
+/* 气泡 */
 const box=document.getElementById('bubbles');
 for(let i=0;i<26;i++){
   const b=document.createElement('i');
   b.style.left=Math.random()*100+'%';
   b.style.animationDuration=6+Math.random()*8+'s';
-  b.style.opacity=.3+Math.random()*.7;
   box.appendChild(b);
 }
 
-/* 手机自动播放兼容 */
+/* 自动播放兼容 */
 const audio=document.getElementById('bgm');
 document.addEventListener('click',()=>audio.play().catch(()=>{}),{once:true});
 </script>
