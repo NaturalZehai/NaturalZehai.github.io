@@ -89,10 +89,10 @@ body{
   overflow:hidden;
   border:4px solid #38bdf8;
   box-shadow:0 0 25px #38bdf8;
+  position:relative;
 }
 
 .hit{animation:hitAnim .25s}
-
 @keyframes hitAnim{
   0%{ transform:translateX(0); }
   25%{ transform:translateX(-12px) rotate(-5deg); }
@@ -101,6 +101,46 @@ body{
   100%{ transform:translateX(0); }
 }
 
+/* ===== 鞭子特效 ===== */
+.whip{
+  position:absolute;
+  right:-120px;
+  top:50%;
+  width:140px;
+  height:6px;
+  background:linear-gradient(90deg,#fff,#7afcff);
+  border-radius:6px;
+  transform-origin:left center;
+  opacity:0;
+  pointer-events:none;
+}
+
+.whip.active{
+  animation: whipAnim .25s ease-out;
+}
+
+@keyframes whipAnim{
+  0%{transform:rotate(30deg);opacity:1}
+  100%{transform:rotate(-35deg);opacity:0}
+}
+
+/* ===== 文本与连击 ===== */
+.hitText{
+  text-align:center;
+  margin-top:10px;
+  font-size:16px;
+  color:#7afcff;
+}
+
+.combo{
+  text-align:center;
+  margin-top:6px;
+  font-weight:800;
+  color:#ff7676;
+  font-size:18px;
+}
+
+/* ===== 攻击按钮 ===== */
 .attackBtn{
   display:block;margin:30px auto 0;
   padding:16px 40px;font-size:20px;
@@ -133,11 +173,10 @@ body{
 <div class="bubbles" id="bubbles"></div>
 <div class="intro"><h1>OceanBlue</h1></div>
 
-<audio id="bgm" autoplay loop>
+<audio id="bgm" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- ===== 主卡片 ===== -->
 <div class="card">
 
   <div class="title">OceanBlue</div>
@@ -156,12 +195,16 @@ body{
     </div>
   </div>
 
-  <!-- 整活网页（受击效果） -->
+  <!-- 整活网页 -->
   <div id="fun" class="page">
 
     <div class="avatar" id="avatar">
       <img src="凡光.jpg" width="100%" height="100%">
+      <div class="whip" id="whip"></div>
     </div>
+
+    <div class="hitText">我是凡光，快来抽我</div>
+    <div class="combo" id="combo">COMBO x0</div>
 
     <button class="attackBtn" onclick="hit()">攻击！</button>
 
@@ -194,9 +237,13 @@ function showPage(id,btn){
   }
 }
 
+let combo=0;
+let timer=null;
+
 function hit(){
   const avatar=document.getElementById("avatar");
   const sound=document.getElementById("hitSound");
+  const whip=document.getElementById("whip");
 
   sound.currentTime=0;
   sound.play().catch(()=>{});
@@ -204,6 +251,19 @@ function hit(){
   avatar.classList.remove("hit");
   void avatar.offsetWidth;
   avatar.classList.add("hit");
+
+  whip.classList.remove("active");
+  void whip.offsetWidth;
+  whip.classList.add("active");
+
+  combo++;
+  document.getElementById("combo").innerText="COMBO x"+combo;
+
+  clearTimeout(timer);
+  timer=setTimeout(()=>{
+    combo=0;
+    document.getElementById("combo").innerText="COMBO x0";
+  },1600);
 }
 
 /* 气泡 */
