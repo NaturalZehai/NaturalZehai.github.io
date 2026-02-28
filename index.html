@@ -77,35 +77,6 @@ body{
 .page{display:none}
 .page.active{display:block}
 
-/* ===== 头像受击 ===== */
-.avatar{
-  margin:20px auto;
-  width:160px;height:160px;border-radius:50%;
-  overflow:hidden;
-  border:4px solid #38bdf8;
-  box-shadow:0 0 25px #38bdf8;
-  position:relative;
-}
-.hit{animation:hitAnim .25s}
-@keyframes hitAnim{
-  25%{ transform:translateX(-12px) rotate(-5deg); }
-  50%{ transform:translateX(12px) rotate(5deg); }
-}
-
-/* ===== 鞭子 ===== */
-.whip{
-  position:absolute;right:-120px;top:50%;
-  width:140px;height:6px;
-  background:linear-gradient(90deg,#fff,#7afcff);
-  border-radius:6px;transform-origin:left center;
-  opacity:0;
-}
-.whip.active{animation: whipAnim .25s ease-out;}
-@keyframes whipAnim{
-  0%{transform:rotate(30deg);opacity:1}
-  100%{transform:rotate(-35deg);opacity:0}
-}
-
 /* ===== 文本 ===== */
 .hitText{text-align:center;margin-top:10px;color:#7afcff;}
 .combo{text-align:center;margin-top:6px;font-weight:800;color:#ff7676}
