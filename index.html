@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OceanBlue</title>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
@@ -76,7 +77,7 @@ body{
 .page{display:none}
 .page.active{display:block}
 
-/* ===== 受击头像 ===== */
+/* ===== 头像受击 ===== */
 .avatar{
   margin:20px auto;
   width:160px;height:160px;border-radius:50%;
@@ -87,66 +88,85 @@ body{
 }
 .hit{animation:hitAnim .25s}
 @keyframes hitAnim{
-  0%{ transform:translateX(0); }
   25%{ transform:translateX(-12px) rotate(-5deg); }
   50%{ transform:translateX(12px) rotate(5deg); }
-  75%{ transform:translateX(-8px); }
-  100%{ transform:translateX(0); }
 }
 
-/* ===== 鞭子特效 ===== */
+/* ===== 鞭子 ===== */
 .whip{
-  position:absolute;
-  right:-120px;
-  top:50%;
-  width:140px;
-  height:6px;
+  position:absolute;right:-120px;top:50%;
+  width:140px;height:6px;
   background:linear-gradient(90deg,#fff,#7afcff);
-  border-radius:6px;
-  transform-origin:left center;
+  border-radius:6px;transform-origin:left center;
   opacity:0;
-  pointer-events:none;
 }
 .whip.active{animation: whipAnim .25s ease-out;}
-@keyframes whipAnim{0%{transform:rotate(30deg);opacity:1}100%{transform:rotate(-35deg);opacity:0}}
+@keyframes whipAnim{
+  0%{transform:rotate(30deg);opacity:1}
+  100%{transform:rotate(-35deg);opacity:0}
+}
 
-/* ===== 文本与连击 ===== */
-.hitText{text-align:center;margin-top:10px;font-size:16px;color:#7afcff;}
-.combo{text-align:center;margin-top:6px;font-weight:800;color:#ff7676;font-size:18px;}
+/* ===== 文本 ===== */
+.hitText{text-align:center;margin-top:10px;color:#7afcff;}
+.combo{text-align:center;margin-top:6px;font-weight:800;color:#ff7676}
 
-/* ===== 攻击按钮 ===== */
+/* ===== 按钮 ===== */
 .attackBtn{display:block;margin:30px auto 0;padding:16px 40px;font-size:20px;
   border:none;border-radius:50px;background:#ef4444;color:white;cursor:pointer;
   box-shadow:0 0 20px #ef4444;}
-.attackBtn:hover{background:#dc2626}
 
 /* ===== 入场 ===== */
 .intro{position:fixed;inset:0;display:grid;place-items:center;
   background:radial-gradient(circle at 50% 40%, #0b2a44, #020b14 70%);
   z-index:10;animation: fadeOut 1.2s ease 2.2s forwards;}
 .intro h1{font-size:42px;background:linear-gradient(90deg,#7afcff,#82b1ff,#7afcff);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;transform:translateY(20px);
-  animation: introText 1.2s ease .4s forwards}
-@keyframes introText{to{opacity:1;transform:translateY(0)}}
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 @keyframes fadeOut{to{opacity:0;visibility:hidden}}
 
-/* ===== 其他页面设置样式 ===== */
-#other .content ul{list-style:none;padding:0;margin-top:10px}
+/* ===== ⭐⭐⭐ 音乐列表高级滚动 ⭐⭐⭐ ===== */
+
+#other .content ul{
+  list-style:none;
+  padding:0;
+  margin-top:10px;
+
+  max-height:180px;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(25px);
+  box-shadow:inset 0 0 20px rgba(255,255,255,.12);
+}
+
+/* 滚动条高级化 */
+#other .content ul::-webkit-scrollbar{
+  width:6px;
+}
+#other .content ul::-webkit-scrollbar-thumb{
+  background:linear-gradient(#7afcff,#82b1ff);
+  border-radius:10px;
+}
+#other .content ul::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+/* 列表项 */
 #other .content ul li{
-  padding:10px 14px;border-radius:12px;margin:6px 0;
+  padding:10px 14px;
+  border-radius:12px;
+  margin:6px;
   background:rgba(255,255,255,.08);
-  backdrop-filter:blur(30%);
   cursor:pointer;
-  transition:background 0.3s, transform 0.2s;
+  transition:.25s;
 }
 #other .content ul li:hover{
-  background:rgba(255,255,255,.15);
+  background:rgba(255,255,255,.18);
   transform:translateX(6px);
 }
 
-/* ===== 音乐设置页面 ===== */
-#musicSettings{margin-top:12px;}
-#musicSettings audio{width:100%;margin-top:10px;}
 </style>
 </head>
 <body>
@@ -160,6 +180,7 @@ body{
 </audio>
 
 <div class="card">
+
   <div class="title">OceanBlue</div>
   <div class="subtitle">泽海</div>
   <div class="line"></div>
@@ -167,25 +188,9 @@ body{
   <!-- 主页 -->
   <div id="home" class="page active">
     <div class="content">
-      <b>欢迎进入 OceanBlue 官方网站</b><br><br>
-      ● 服务项目：<br>
-      <span style="color:#7afcff;cursor:pointer"
-        onclick="showPage('fun',document.querySelector('.nav button'))">
-        整活网页
-      </span> / 三角洲
+      <b>欢迎进入 OceanBlue 官方网站</b>
+      <p><b>·</b>暂无任何服务</p>
     </div>
-  </div>
-
-  <!-- 整活网页 -->
-  <div id="fun" class="page">
-    <div class="avatar" id="avatar">
-      <img src="凡光.jpg" width="100%" height="100%">
-      <div class="whip" id="whip"></div>
-    </div>
-    <div class="hitText">我是凡光，快来抽我</div>
-    <div class="combo" id="combo">COMBO x0</div>
-    <button class="attackBtn" onclick="hit()">抽打他！</button>
-    <audio id="hitSound" src="饿.MP3"></audio>
   </div>
 
   <!-- 通知 -->
@@ -197,21 +202,25 @@ body{
   <div id="other" class="page">
     <div class="content">
       🌊 OceanBlue 项目
-      <br>
       <ul>
         <li onclick="toggleMusicSettings()">⚙️ 音乐设置</li>
       </ul>
-      <!-- 音乐设置嵌入 -->
+
       <div id="musicSettings" style="display:none;">
         <p>选择你喜欢的背景音乐：</p>
+
+        <!-- ⭐ 可滚动列表 -->
         <ul id="musicList">
           <li data-src="The Other side of paradise.mp3">🎵 The Other side of paradise</li>
           <li data-src="Phone Kisses.mp3">🎵 Phone Kisses</li>
-          <li data-src="We Don't Talk Anymore(Remix).mp3">🎵 We Don't Talk Anymore(Remix)</li>
+          <li data-src="We Don't Talk Anymore(Remix).mp3">🎵 We Don't Talk Anymore</li>
+          <li data-src=".mp3">🎵 </li>
+          <li data-src=".mp3">🎵 </li>
+          <li data-src=".mp3">🎵 </li>
+          <li data-src=".mp3">🎵 </li>
         </ul>
-        <audio id="customBgm" controls>
-          你的浏览器不支持播放
-        </audio>
+
+        <audio id="customBgm" controls></audio>
       </div>
     </div>
   </div>
@@ -222,45 +231,17 @@ body{
     <button onclick="showPage('notice',this)">通知</button>
     <button onclick="showPage('other',this)">其他</button>
   </div>
+
 </div>
 
 <script>
+
+/* 页面切换 */
 function showPage(id,btn){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  if(btn){
-    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-}
-
-let combo=0;
-let timer=null;
-
-function hit(){
-  const avatar=document.getElementById("avatar");
-  const sound=document.getElementById("hitSound");
-  const whip=document.getElementById("whip");
-
-  sound.currentTime=0;
-  sound.play().catch(()=>{});
-
-  avatar.classList.remove("hit");
-  void avatar.offsetWidth;
-  avatar.classList.add("hit");
-
-  whip.classList.remove("active");
-  void whip.offsetWidth;
-  whip.classList.add("active");
-
-  combo++;
-  document.getElementById("combo").innerText="COMBO x"+combo;
-
-  clearTimeout(timer);
-  timer=setTimeout(()=>{
-    combo=0;
-    document.getElementById("combo").innerText="COMBO x0";
-  },1600);
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
 /* 气泡 */
@@ -272,35 +253,30 @@ for(let i=0;i<26;i++){
   box.appendChild(b);
 }
 
-/* 自动播放兼容 */
+/* 自动播放 */
 const audio=document.getElementById('bgm');
 document.addEventListener('click',()=>audio.play().catch(()=>{}),{once:true});
 
-/* ===== 音乐设置功能 ===== */
+/* 音乐设置 */
 const customBgm = document.getElementById('customBgm');
 const musicList = document.getElementById('musicList');
-const bgm = document.getElementById('bgm');
 
 musicList.addEventListener('click', e=>{
-  if(e.target && e.target.nodeName==='LI'){
+  if(e.target.nodeName==='LI'){
     customBgm.src = e.target.dataset.src;
     customBgm.play().catch(()=>{});
-    Array.from(musicList.children).forEach(li=>li.style.background='rgba(255,255,255,.08)');
-    e.target.style.background='rgba(255,255,255,.2)';
   }
 });
 
-// 用户播放自定义音乐时暂停BGM
-customBgm.addEventListener('play', ()=>{ if(!bgm.paused) bgm.pause(); });
-// 暂停或结束自定义音乐恢复BGM
-customBgm.addEventListener('pause', ()=>{ if(bgm.paused) bgm.play().catch(()=>{}); });
-customBgm.addEventListener('ended', ()=>{ if(bgm.paused) bgm.play().catch(()=>{}); });
+customBgm.addEventListener('play', ()=> audio.pause());
+customBgm.addEventListener('pause', ()=> audio.play().catch(()=>{}));
+customBgm.addEventListener('ended', ()=> audio.play().catch(()=>{}));
 
-// 切换音乐设置显示
 function toggleMusicSettings(){
   const el = document.getElementById('musicSettings');
   el.style.display = el.style.display==='none'?'block':'none';
 }
+
 </script>
 
 </body>
